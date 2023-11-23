@@ -28,3 +28,36 @@ Promise //
 .finaly(value => {
     console.log('finaly');
 });
+
+// 3, Promise chaining
+const fetchNumber = new Promise((resolve, reject) => {
+    setTimeout(() => resolve(1), 1000);
+});
+
+
+fetchNumber
+.then(num => num * 2)
+.then(num => num * 3)
+.then(num => {
+    return Promise((resolve, reject) => {
+        setTimeout(() => resolve(num -1), 1000);
+    });
+})
+.then(num => console.log(num));
+
+
+
+// 4,Egg Handing
+
+const getHen = () => 
+    new Promise((resolve, reject) => {
+    setTimeout(() => resolve('닭'), 1000);
+});
+const getEgg = hen => 
+    new Promise((resolve, reject) => {
+    setTimeout(() => resolve(`${hen} => 계란`), 1000);
+});
+const cook = egg => 
+    new Promise((resolve, reject) => {
+    setTimeout(() => resolve(`${hen} => 계란후라이`), 1000);
+});
